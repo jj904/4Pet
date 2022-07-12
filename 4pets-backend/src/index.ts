@@ -26,6 +26,10 @@ app.use(cors());
 app.use(express.json());
 //app.use("/api", routes);
 
+app.get('/', (req, res) => {
+  res.send('Please work');
+})
+
 // start the Express server
 app.listen(port, () => {
   console.log( `server started at http://localhost:${ port }` );
