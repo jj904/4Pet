@@ -12,7 +12,7 @@
 import express from 'express';
 import cors from 'cors';
 
-//import routes from "./routes";
+import routes from './routes';
 import { initDB } from './db';
 
 // initialize firebase
@@ -24,11 +24,11 @@ const port = 8080;
 app.use(cors());
 // define a route handler for the default home page
 app.use(express.json());
-//app.use("/src", routes);
+app.use("/API", routes);
 
-app.get('/', (req, res) => {
-  res.send('Please work');
-})
+// app.get('/', (req, res) => {
+//   res.send('Please work');
+// })
 
 // start the Express server
 app.listen(port, () => {
