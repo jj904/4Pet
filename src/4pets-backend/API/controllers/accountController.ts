@@ -24,7 +24,6 @@ export const getAccount = async(req: any, res: any, next: any) => {
         const accRef = db.collection('Users').doc(accountId);
         let doc = await accRef.get();
         if (!doc.exists) {
-            console.log("No document found, creating...");
             admin.auth().getUserByEmail(accountId).then(async (user) => {
                     await accRef.set({email: accountId});
                     doc = await accRef.get();
@@ -46,11 +45,12 @@ export const createAccount = async(req: any, res: any, next: any) => {
     console.log("Called createAccount method");
     
     try {
-        const {name, password, email, phone, creditCard, payment} = req.body;
+        const {name, password, email, pet, phone} = req.body;
         const toAdd = {
             name,
             password,
             email,
+            pet,
             phone
         }
         const ret = await db.collection('Users').doc(email).set(toAdd, {merge:true});
