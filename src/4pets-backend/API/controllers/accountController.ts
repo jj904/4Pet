@@ -86,3 +86,11 @@ export const deleteAccount = async(req: any, res: any, next: any) => {
         next(err);
     }
 }
+
+export const registerAccount = async(req: any, res: any, next: any) => {
+    console.log("Called registerAccount method");
+}
+
+export const loginAccount = async(req: any, res: any, next: any) => {
+    console.log("Called loginAccount method");
+}
