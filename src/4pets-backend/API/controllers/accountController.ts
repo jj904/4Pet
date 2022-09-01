@@ -45,10 +45,11 @@ export const createAccount = async(req: any, res: any, next: any) => {
     console.log("Called createAccount method");
     
     try {
-        const {name, password, email, pet, phone} = req.body;
+        const {name, password, zipcode, email, pet, phone} = req.body;
         const toAdd = {
             name,
             password,
+            zipcode,
             email,
             pet,
             phone
