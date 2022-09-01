@@ -1,4 +1,4 @@
-import admin from 'firebase-admin';
+import admin, { firestore } from 'firebase-admin';
 import httpStatus, { NOT_FOUND } from 'http-status';
 import { db } from '../db';
 
@@ -89,8 +89,31 @@ export const deleteAccount = async(req: any, res: any, next: any) => {
 
 export const registerAccount = async(req: any, res: any, next: any) => {
     console.log("Called registerAccount method");
+    // try {
+    //     const {username, email, password} = req.body;
+    //     const toRegister = {
+    //         username,
+    //         email,
+    //         password
+    //     }
+    //     //const ret = await db.collection('Users').doc(email).set(to, {merge:true});
+        
+    //     firebase.auth().createUserWithEmailAndPassword(email, password).then((result)=>{
+    //         console.log(result);
+    //         console.log(result.user);
+    //         //result.user.updateProfile( {displayName: name} )
+    //     })
+    //     console.log("Created");
+    //     const accRef = db.collection('Users').doc(email);
+    //     const doc = await accRef.get();
+    //     res.status(httpStatus.OK).json(doc.data());
+    // } catch(err) {
+    //     console.log("Could not create new account");
+    //     next(err);
+    // }
 }
 
 export const loginAccount = async(req: any, res: any, next: any) => {
     console.log("Called loginAccount method");
 }
+
