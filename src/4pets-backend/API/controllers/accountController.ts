@@ -116,10 +116,4 @@ export const registerAccount = async(req: any, res: any, next: any) => {
 
 export const loginAccount = async(req: any, res: any, next: any) => {
     console.log("Called loginAccount method");
-<<<<<<< HEAD
-    //temp
 }
-=======
-}
-
->>>>>>> 67fe4bce8f887175c1812f911df335799b779e4b
