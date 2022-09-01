@@ -66,7 +66,7 @@ function LoginPage() {
               htmlFor="standard-adornment-username"
               color="primary"
             >
-              Username
+              Username/Email
             </InputLabel>
             <Input
               id="standard-adornment-username"
