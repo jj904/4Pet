@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import {
-  GoogleAuthProvider,
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -31,7 +30,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const googleAuthProvider = new GoogleAuthProvider();
 
 const registerUser = async (username, email, password) => {
   try {
