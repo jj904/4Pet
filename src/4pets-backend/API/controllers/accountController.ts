@@ -17,7 +17,7 @@ export const getAccounts = async(req: any, res: any, next: any) => {
 }
 export const getAccount = async(req: any, res: any, next: any) => {
     console.log("Called getAccount method");
-
+    
     const { accountId } = req.params;
 
     try {
@@ -42,8 +42,7 @@ export const getAccount = async(req: any, res: any, next: any) => {
 }
 
 export const createAccount = async(req: any, res: any, next: any) => {
-    console.log("Called createAccount method");
-    
+    console.log("Called createAccount method cringe");
     try {
         const {name, password, zipcode, email, pet, phone} = req.body;
         const toAdd = {
