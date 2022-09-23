@@ -20,7 +20,7 @@ export const zipFeature = async(req: any, res: any, next: any) => {
         console.log(zipcodelink);
         //console.log(resp);
         resp.data.args
-        res.status(httpStatus.OK).json(resp.data);
+        res.status(httpStatus.OK).json(resp.data.data.city); //resp.data to get whole resp.data.data.city to get city
     } catch (err) {
         console.log("Could not get accounts");
         next(err);
