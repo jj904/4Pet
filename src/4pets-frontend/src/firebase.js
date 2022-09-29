@@ -1,4 +1,6 @@
-import { initializeApp } from "firebase/app";
+import {
+  initializeApp
+} from "firebase/app";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -14,6 +16,8 @@ import {
   collection,
   where,
   addDoc,
+  doc,
+  setDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -31,30 +35,21 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const registerUser = async ( email, password) => {
+const registerUser = async (email, password) => {
+  const res = await createUserWithEmailAndPassword(auth, email, password);
+  const user = res.user;
   try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      email,
-      
-    });
-  } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.error(errorCode + errorMessage);
+    await setDoc(doc(db, "Users", user.uid), {
+      email: user.email,
+      uid: user.uid, 
+    }); 
+  } catch (e) {
+    console.error("Error adding document: ", e);
   }
-};
+}
 
 const signIn = async (email, password) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.error(errorCode + errorMessage);
-  }
+  await signInWithEmailAndPassword(auth, email, password);
 };
 
 const signOutUser = () => {
@@ -62,14 +57,16 @@ const signOutUser = () => {
 };
 
 const resetPassword = async (email) => {
-  try {
-    await sendPasswordResetEmail(auth, email);
-    alert("Password reset link sent!");
-  } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.error(errorCode + errorMessage);
-  }
+  await sendPasswordResetEmail(auth, email);
+  alert("Password reset link sent!");
+
 };
 
-export { auth, db, signIn, registerUser, resetPassword, signOutUser };
+export {
+  auth,
+  db,
+  signIn,
+  registerUser,
+  resetPassword,
+  signOutUser
+};

@@ -30,7 +30,7 @@ function LoginPage() {
       return;
     }
     if (user){
-      alert("welcome!");
+      alert("Welcome!");
       navigate("/")
       return;
     }
@@ -53,7 +53,7 @@ function LoginPage() {
       navigate('/login')
     }
    catch {
-    setError('Faile to sign in')
+    setError('Invaild Username/Password')
     setOpen(true)
     setLoading (false)
    }
@@ -113,8 +113,6 @@ function LoginPage() {
               type="email"
               label="Email"
               required
-              
-              
               value={values.email}
               onChange={handleChange("email")}
             />
