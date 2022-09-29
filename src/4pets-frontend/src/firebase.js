@@ -31,14 +31,14 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const registerUser = async (username, email, password) => {
+const registerUser = async ( email, password) => {
   try {
-    const res = await createUserWithEmailAndPassword(auth,username, email, password);
+    const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     await addDoc(collection(db, "users"), {
       uid: user.uid,
       email,
-      username,
+      
     });
   } catch (error) {
     const errorCode = error.code;

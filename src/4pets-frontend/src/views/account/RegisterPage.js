@@ -6,17 +6,20 @@ import { Link, useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import {
-  auth,
-  registerUser,
-  resetPassword,
-  signOutUser,
-} from "../../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import {registerUser,} from "../../firebase";
+import {useAuth} from '../../contexts/AuthContext'
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Collapse from '@mui/material/Collapse';
+
 
 function RegisterPage() {
-  const navigate = useNavigate();
-  const [user, loading, error] = useAuthState(auth);
+  const {user} = useAuth();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate ();
+  const [error, setError] = useState();
+  const [open, setOpen] = useState(true);
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -25,22 +28,16 @@ function RegisterPage() {
     showPassword: false,
     showConfirmPassword: false,
   });
+
   useEffect(() => {
-    if (loading) {
-      return;
-    }
+    if (loading){
+      return ;
+    } 
     if (user) {
-      alert("welcome!");
-      navigate("/");
-    }
-    if (error) {
-      return (
-        <div>
-          <p>Error: {error.message}</p>
-        </div>
-      );
-    }
-  }, [user, loading, navigate, error]);
+      navigate('/');
+      return;
+    };
+  }, [user, loading,error,open, navigate]);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -48,16 +45,25 @@ function RegisterPage() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    if (!values.email || !values.password || !values.confirmPassword){
+        setOpen(true)
+        return setError('Please Fill out all require info')
+    } 
+    if (values.password !== values.confirmPassword){
+      setOpen(true)
+      return setError('Passwords do not match')
+    } 
     try {
-      if (!values.username || !values.email || !values.password || !values.confirmPassword){
-        alert("Please enter all require info");
-        
-      } 
-      else{
-        registerUser(values.username, values.email, values.password);
+        setError('')
+        setOpen(false)
+        setLoading (true)
+        await registerUser( values.email, values.password);
+        navigate('/login')
       }
-    } catch (error) {
-      alert(error.message);
+     catch {
+      setError('Faile to creat account')
+      setOpen(true)
+      setLoading (false)
     }
   }
 
@@ -71,6 +77,22 @@ function RegisterPage() {
         overflow: "hidden",
       }}
     >
+    <Collapse in={open}>
+      {error && <Alert severity="error"
+       action={
+        <IconButton
+          aria-label="close"
+          color="inherit"
+          size="small"
+          onClick={() => {
+            setOpen(false);
+          }}
+        >
+          <CloseIcon fontSize="inherit" />
+        </IconButton>
+      }>
+        {error}</Alert>}
+        </Collapse>
       <div style={{ width: "400px", margin: "200px auto" }}>
         <Typography variant="h3" align="center" sx={{ mb: 1 }}>
           Register
@@ -141,7 +163,7 @@ function RegisterPage() {
               variant="contained"
               color="primary"
               sx={{ position: "relative", mb: 2 }}
-              disable={values.loading}
+              disable={loading}
               type="submit"
             >
               Register

@@ -5,15 +5,14 @@ import Button from "@mui/material/Button";
 import { Link,useNavigate  } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import {signIn} from "../../firebase";
+import {resetPassword } from "../../firebase";
 import {useAuth} from '../../contexts/AuthContext'
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Collapse from '@mui/material/Collapse';
 
-function LoginPage() {
-  
+function ForgetPassword() {
   const navigate = useNavigate();
   const {user} = useAuth();
   const [loading, setLoading] = useState(false);
@@ -21,11 +20,9 @@ function LoginPage() {
   const [open, setOpen] = useState(true);
   const [values, setValues] = useState({
     email: "",
-    password: "",
-    showPassword: false,
   });
 
- useEffect(() => {
+  useEffect(() => {
     if (loading) {
       return;
     }
@@ -37,23 +34,22 @@ function LoginPage() {
   }, [user, loading, navigate, error, open]);
 
 
- 
-
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+
+  
  async function handleSubmit(event){
     event.preventDefault();
     try {
       setError('')
       setOpen(false)
       setLoading (true)
-      await signIn(values.email, values.password)
-      navigate('/login')
+      await resetPassword(values.email)
     }
    catch {
-    setError('Faile to sign in')
+    setError('Faile Reset Password')
     setOpen(true)
     setLoading (false)
    }
@@ -71,7 +67,8 @@ function LoginPage() {
         overflow: "hidden",
       }}
     >
-      <Collapse in={open}>
+
+<Collapse in={open}>
       {error && <Alert severity="error"
        action={
         <IconButton
@@ -87,9 +84,10 @@ function LoginPage() {
       }>
         {error}</Alert>}
         </Collapse>
+
       <div style={{ width: "400px", margin: "200px auto" }}>
         <Typography variant="h3" align="center" sx={{ mb: 1 }}>
-          Welcome!
+          Reset Password
         </Typography>
         <Grid
           container
@@ -113,22 +111,8 @@ function LoginPage() {
               type="email"
               label="Email"
               required
-              
-              
               value={values.email}
               onChange={handleChange("email")}
-            />
-
-            <TextField
-            
-              sx={{ mb: 2 }}
-              id="password"
-              name="password"
-              label="Password"
-              required
-              type={values.showPassword ? "text" : "password"}  
-              value={values.password}
-              onChange={handleChange("password")}
             />
       
             <Button
@@ -139,14 +123,10 @@ function LoginPage() {
               disable={values.loading}
               type="submit"
             >
-              Login
+              Reset
             </Button>
             <small>
-              <Link to="/forgetPassword" >Froget Password? </Link>
-            </small>
-            <br/>
-            <small>
-              Need an account? <Link to="/register">Register</Link>
+               <Link to="/Login">Login</Link>
             </small>
           </Box>
         </Grid>
@@ -155,4 +135,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default ForgetPassword;
