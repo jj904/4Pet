@@ -7,13 +7,15 @@ import { useNavigate } from "react-router-dom";
 
 
 function HomePage() {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
   useEffect(() => {
     if (loading){
       return ;
     } 
-    if (!user) return navigate("/login");
+    if (!user) {
+      navigate("/login");
+    } 
   }, [user, loading, navigate]);
 
   return (
