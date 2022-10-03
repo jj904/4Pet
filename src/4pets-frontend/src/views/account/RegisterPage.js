@@ -12,7 +12,7 @@ import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Collapse from '@mui/material/Collapse';
-
+import axios from "axios"
 
 function RegisterPage() {
   const {user} = useAuth();
@@ -23,11 +23,17 @@ function RegisterPage() {
   const [values, setValues] = useState({
     username: "",
     email: "",
+    zipcode: "",
     password: "",
     confirmPassword: "",
     showPassword: false,
     showConfirmPassword: false,
   });
+
+  const fetchData = async() => {
+    const res  =  await axios.get(); 
+    console.log(res.data);
+  }
 
   useEffect(() => {
     if (loading){
@@ -57,8 +63,8 @@ function RegisterPage() {
         setError('')
         setOpen(false)
         setLoading (true)
-        await registerUser( values.email, values.password);
-        navigate('/login')
+        await registerUser( values.username,values.email, values.password, values.zipcode);
+        navigate('/')
       }
      catch {
       setError('Faile to creat account')
@@ -136,6 +142,17 @@ function RegisterPage() {
               required
               value={values.email}
               onChange={handleChange("email")}
+            />
+              <TextField
+              sx={{ mb: 1 }}
+              id="zipcode"
+              name="zipcode"
+              type="zipcode"
+              label="ZipCode"
+              inputProps={{ maxLength: 5 ,  minLength: 5 }}
+              required
+              value={values.zipcode}
+              onChange={handleChange("zipcode")}
             />
 
             <TextField

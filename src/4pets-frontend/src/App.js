@@ -5,7 +5,7 @@ import ForgetPassword from './views/account/ForgetPassword';
 import HomePage from './views/user/HomePage';
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import {AuthContext, AuthProvider} from '../src/contexts/AuthContext'
+import {AuthProvider} from '../src/contexts/AuthContext'
 
 
 

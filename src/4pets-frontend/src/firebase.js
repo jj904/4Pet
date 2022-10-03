@@ -11,11 +11,6 @@ import {
 
 import {
   getFirestore,
-  query,
-  getDocs,
-  collection,
-  where,
-  addDoc,
   doc,
   setDoc,
 } from "firebase/firestore";
@@ -35,13 +30,15 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const registerUser = async (email, password) => {
+const registerUser = async (username, email, password, zipcode) => {
   const res = await createUserWithEmailAndPassword(auth, email, password);
   const user = res.user;
   try {
     await setDoc(doc(db, "Users", user.uid), {
       email: user.email,
       uid: user.uid, 
+      username : username,
+      zipcode : zipcode,
     }); 
   } catch (e) {
     console.error("Error adding document: ", e);
