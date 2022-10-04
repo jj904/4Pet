@@ -10,13 +10,13 @@ export const AuthProvider  = ({children}) => {
     const navigate  = useNavigate();
 
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
+       const authState =  auth.onAuthStateChanged((user) => {
             setUser(user);
             setLoading(false);
-            if(user){
-                navigate('/');
-            }  
+          
         })
+
+        return authState
     }, [user, navigate]);
     const value = {user};
     return (

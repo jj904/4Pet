@@ -39,10 +39,6 @@ function RegisterPage() {
     if (loading){
       return ;
     } 
-    if (user) {
-      navigate('/');
-      return;
-    };
   }, [user, loading,error,open, navigate]);
 
   const handleChange = (prop) => (event) => {
@@ -64,7 +60,7 @@ function RegisterPage() {
         setOpen(false)
         setLoading (true)
         await registerUser( values.username,values.email, values.password, values.zipcode);
-        navigate('/')
+        navigate('/login')
       }
      catch {
       setError('Faile to creat account')

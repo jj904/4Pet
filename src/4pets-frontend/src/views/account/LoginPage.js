@@ -30,7 +30,6 @@ function LoginPage() {
       return;
     }
     if (user){
-      alert("Welcome!");
       navigate("/")
       return;
     }
@@ -50,7 +49,7 @@ function LoginPage() {
       setOpen(false)
       setLoading (true)
       await signIn(values.email, values.password)
-      navigate('/login')
+      navigate('/')
     }
    catch {
     setError('Invaild Username/Password')
