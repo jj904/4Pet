@@ -3,9 +3,10 @@ import LoginPage from './views/account/LoginPage';
 import RegisterPage from './views/account/RegisterPage';
 import ForgetPassword from './views/account/ForgetPassword';
 import HomePage from './views/user/HomePage';
+import Chat from './views/user/Chat';
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import {AuthContext, AuthProvider} from '../src/contexts/AuthContext'
+import {AuthProvider} from '../src/contexts/AuthContext'
 
 
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forgetPassword" element={<ForgetPassword />} />
+        <Route path="/chat" element={<Chat/>} />
       </Routes>
       </AuthProvider>
     </Router>

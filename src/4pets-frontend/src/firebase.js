@@ -11,14 +11,12 @@ import {
 
 import {
   getFirestore,
-  query,
-  getDocs,
-  collection,
-  where,
-  addDoc,
   doc,
   setDoc,
 } from "firebase/firestore";
+import * as CONSTANTS from "./contexts/Constants.js"
+import { CometChat } from "@cometchat-pro/chat";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAEP0N6AfQ5Vde025mJGBG5AVP-V-FMXO8",
@@ -35,21 +33,46 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const registerUser = async (email, password) => {
+const registerUser = async (username, email, password, zipcode) => {
   const res = await createUserWithEmailAndPassword(auth, email, password);
   const user = res.user;
   try {
     await setDoc(doc(db, "Users", user.uid), {
       email: user.email,
       uid: user.uid, 
+      username : username,
+      zipcode : zipcode,
     }); 
+
+
+    var users = new CometChat.User(user.uid);
+    users.setName(username);
+    await CometChat.createUser(users, CONSTANTS.AUTH_KEY).then(
+      users => {
+            console.log("user created", users);
+        },error => {
+            console.log("error", error);
+        }
+    )
+
+
   } catch (e) {
     console.error("Error adding document: ", e);
   }
 }
 
 const signIn = async (email, password) => {
-  await signInWithEmailAndPassword(auth, email, password);
+  const res = await signInWithEmailAndPassword(auth, email, password);
+  const user = res.user;
+  await CometChat.login(user.uid, CONSTANTS.AUTH_KEY).then(
+    users => {
+      console.log("Login Successful:", { users });    
+    },
+    error => {
+      console.log("Login failed with exception:", { error });    
+    }
+  );
+
 };
 
 const signOutUser = () => {
