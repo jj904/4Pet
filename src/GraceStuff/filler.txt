@@ -1,1 +1,2 @@
-LOOOOOOOL
+index.html file => mainpage that display user pic and info
+upload.html     => uploadpage that user can upload their pic and info.  
