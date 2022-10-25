@@ -16,6 +16,7 @@ export const navbarStyle = () => {
 			justifyContent: "space-around",
 			width: "100%",
 			height: "100%",
+            backgroundColor: "#ffa7a7"
 		};
 }
 
@@ -35,7 +36,7 @@ export const itemStyle = props => {
 export const itemLinkStyle = (icon, isActive, context) => {
 
     let activeStateBg = (isActive) ? { 
-        backgroundColor: `${context.theme.primaryColor}`,
+        backgroundColor: `#FFFFFF`,
     } : {
         backgroundColor: `${context.theme.secondaryTextColor}`,
     };
@@ -52,7 +53,7 @@ export const itemLinkStyle = (icon, isActive, context) => {
 export const itemLinkTextStyle = (isActive, context) => {
 
     const colorProp = (isActive) ? {
-        color: `${context.theme.primaryColor}`
+        color: `#FFFFFF`
     } : {
         color: `${context.theme.secondaryTextColor}`,
     };

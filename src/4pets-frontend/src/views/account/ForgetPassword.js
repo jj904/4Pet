@@ -23,6 +23,7 @@ function ForgetPassword() {
   });
 
   useEffect(() => {
+    document.title = "Forget Password";  
     if (loading) {
       return;
     }
@@ -49,7 +50,7 @@ function ForgetPassword() {
       await resetPassword(values.email)
     }
    catch {
-    setError('Faile Reset Password')
+    setError('Fail Reset Password')
     setOpen(true)
     setLoading (false)
    }

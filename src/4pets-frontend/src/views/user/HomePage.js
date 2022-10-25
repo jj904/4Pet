@@ -17,6 +17,7 @@ function HomePage() {
   });
 
   useEffect(() => {
+    document.title = "Home";  
     if (loading) {
       return;
     }
@@ -34,16 +35,8 @@ function HomePage() {
     <div>
       
       <NavBar></NavBar>
-      HomePage
-        <Button
-              variant="contained"
-              color="primary"
-              sx={{ position: "relative",mb: 2  }}
-              type="logout"
-              onClick={signOutUser}
-            >
-              Logout
-        </Button>
+     Home
+
     </div>
   )
 }
