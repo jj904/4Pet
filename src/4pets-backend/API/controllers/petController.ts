@@ -19,7 +19,7 @@ export const getPets = async(req: any, res: any, next: any) => {
             temp.push(pet);
         })
 
-        res.status(httpStatus.OK).json({pets: temp})
+        res.status(httpStatus.OK).json(temp);
     } catch (err) {
         console.log("Could not get pets");
         next(err);
