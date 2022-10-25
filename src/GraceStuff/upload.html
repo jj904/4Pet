@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Pet (4pet)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">4Pet</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/index.html">HOME</a>
+        <a class="nav-item nav-link" href="#">New Post</a>
+        <a class="nav-item nav-link" href="/message.html">Message</a>
+        <a class="nav-item nav-link" href="/upload.html">profile</a>
+       
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container mt-3">
+    <input type="text" class="form-control mt-2" id="name" placeholder="name">
+    <input type="text" class="form-control mt-2" id="type" placeholder="type">
+    <input type="text" class="form-control mt-2" id="city" placeholder="city">
+    <textarea class="form-control mt-2" id="introduce your self">content</textarea>
+    <input class="form-control mt-2" type="file" id="image">
+    <button class="btn btn-danger mt-3" id="send">upload </button>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
+
+  <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyAEP0N6AfQ5Vde025mJGBG5AVP-V-FMXO8",
+        authDomain: "pets-4958a.firebaseapp.com",
+        projectId: "pets-4958a",
+        storageBucket: "pets-4958a.appspot.com",
+        messagingSenderId: "20356710494",
+        appId: "1:20356710494:web:da87533a3cb023d47af4cf",
+        measurementId: "G-GQN2ZYKXB8"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+  </script>
+
+<script>
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+   
+    $('#send').click(function(){ 
+      //image file upload
+      var file = document.querySelector('#image').files[0];
+      var storageRef = storage.ref();
+      var savingPath = storageRef.child('image/' + file.name);
+      var imgUpload = savingPath.put(file);
+
+      imgUpload.on( 'state_changed', 
+        // 변화시 동작하는 함수 
+        null, 
+        //에러시 동작하는 함수
+        (error) => {
+        console.error('fail..', error);
+        }, 
+        // 성공시 동작하는 함수
+        () => {
+          imgUpload.snapshot.ref.getDownloadURL().then((url) => {
+            console.log('path of upload', url);
+            var toSave = { 
+              name: $('#name').val(),
+              city : $('#city').val(),
+              type : $('#type').val(),
+              date : new Date(),
+              bg_img : url
+            }
+            db.collection('user').add(toSave).then((result)=>{
+            console.log(result);
+            window.location.href = '/index.html'
+            }).catch((error)=>{
+                console.log(err) //console창에 error가 나옴.
+            })
+         });
+       });
+      }
+    );
+
+
+  
+
+</script>
+
+</body>
+</html>
