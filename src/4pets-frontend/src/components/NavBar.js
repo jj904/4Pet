@@ -71,6 +71,8 @@ const NavBar = () => {
         <MenuItem >
            <Link to="/chat" style={{color:"white" ,textDecoration:'none' }} >Chat </Link>
         </MenuItem>
+        <Box sx={{ flexGrow: 1 }} />
+        <Box  sx={{ display: { xs: 'none', md: 'flex' } }}>
         <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -93,6 +95,7 @@ const NavBar = () => {
         <MenuItem onClick={handleClose}><Link to="/profile"  style={{color:"black" ,textDecoration:'none' }} >Profile </Link></MenuItem>
         <MenuItem onClick={signOutUser}>Logout</MenuItem>
       </Menu>
+      </Box>
       </Toolbar>
       </Container>
     </AppBar>
