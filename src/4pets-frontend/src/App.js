@@ -7,6 +7,7 @@ import Chat from './views/user/Chat';
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import {AuthProvider} from '../src/contexts/AuthContext'
+import ProfilePage from './views/user/ProfilePage';
 
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forgetPassword" element={<ForgetPassword />} />
         <Route path="/chat" element={<Chat/>} />
+        <Route path="/profile" element={<ProfilePage/>} />
       </Routes>
       </AuthProvider>
     </Router>

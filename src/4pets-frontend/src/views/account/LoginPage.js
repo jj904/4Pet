@@ -26,6 +26,7 @@ function LoginPage() {
   });
 
  useEffect(() => {
+  document.title = "Login";  
     if (loading) {
       return;
     }
@@ -139,7 +140,7 @@ function LoginPage() {
               Login
             </Button>
             <small>
-              <Link to="/forgetPassword" >Froget Password? </Link>
+              <Link to="/forgetPassword" >Forget Password? </Link>
             </small>
             <br/>
             <small>

@@ -10,6 +10,7 @@ export const contactWrapperStyle = (props, theme) => {
         flexDirection: "column",
         height: "100%",
         boxSizing: "border-box",
+        backgroundColor: "#ffa7a7",
         ...borderStyle,
         "*": {
             boxSizing: "border-box",
@@ -39,6 +40,7 @@ export const contactHeaderStyle = theme => {
 		alignItems: "center",
 		borderBottom: `1px solid ${theme.borderColor.primary}`,
 		height: "70px",
+        backgroundColor: "#ffa7a7",
 	};
 };
 

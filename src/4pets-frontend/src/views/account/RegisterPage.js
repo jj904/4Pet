@@ -12,7 +12,6 @@ import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Collapse from '@mui/material/Collapse';
-import axios from "axios"
 
 function RegisterPage() {
   const {user} = useAuth();
@@ -30,12 +29,8 @@ function RegisterPage() {
     showConfirmPassword: false,
   });
 
-  const fetchData = async() => {
-    const res  =  await axios.get(); 
-    console.log(res.data);
-  }
-
   useEffect(() => {
+    document.title = "Register";  
     if (loading){
       return ;
     } 
@@ -63,7 +58,7 @@ function RegisterPage() {
         navigate('/login')
       }
      catch {
-      setError('Faile to creat account')
+      setError('Fail to creat account')
       setOpen(true)
       setLoading (false)
     }
