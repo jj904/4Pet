@@ -7,8 +7,6 @@ import {
   ref,
   uploadBytes,
   getDownloadURL,
-  listAll,
-  list,
   deleteObject,
 } from "firebase/storage";
 import { doc, setDoc, deleteDoc } from "firebase/firestore";
@@ -17,7 +15,6 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -28,8 +25,9 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { db } from "../../firebase";
 import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import backGraoundImage from "../../assets/19085844_v1008-25-b.jpg"; 
+import Divider from '@mui/material/Divider';
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -41,8 +39,6 @@ function ProfilePage() {
   const [petInfo, setPetInfo] = useState([]);
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState([]);
-  const imageListRef = ref(storage, user.uid + "/petImgs/");
-  const [state, setState] = useState([]);
   const [values, setValues] = useState({
     petName: "",
     petType: "",
@@ -120,8 +116,8 @@ function ProfilePage() {
     if (!user) {
       navigate("/login");
       return;
-    }
-    const fetchData = async () => {
+    }else{
+      const fetchData = async () => {
       fetch(`http://localhost:8080/api/account/${user.uid}`).then(
         async (res) => {
           const jsonResult = await res.json();
@@ -134,19 +130,29 @@ function ProfilePage() {
         .then((res) => setPetInfo(res));
     };
     fetchData();
+    }
+    
   }, [user, loading, navigate, error]);
 
   return (
-    <div>
+    <div style={{ backgroundImage: `url(${backGraoundImage})`, height: "100vh" }}>
       <NavBar></NavBar>
-      <Box justifyContent="center" alignItems="center" sx={{ mb: 3, mt: 3 }}>
-        <Typography gutterBottom variant="h4" component="div" sx={{ mb: 3 }}>
+      <Grid justifyContent="center"
+        alignItems="center"
+        display="flex"
+        direction="column"
+        sx={{  mt: 3 }}>
+        <Typography gutterBottom variant="h4" component="div" sx={{ mb: 1 }}>
           {userInfo.username}
         </Typography>
-        <Typography gutterBottom variant="h6" component="div" sx={{ mb: 3 }}>
+        <Typography gutterBottom variant="h6" component="div" sx={{ mb: 1 }}>
           Email: {userInfo.email}
         </Typography>
-      </Box>
+        <Typography gutterBottom variant="h6" component="div">
+          Location: {userInfo.zipcode}
+        </Typography>
+      </Grid>
+      <Divider  sx={{ mb: 1 }}/>
       <div>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Add Pet</DialogTitle>
@@ -187,7 +193,7 @@ function ProfilePage() {
             <Grid item xs={5.5}>
               <Typography
                 gutterBottom
-                variant="h5"
+                variant="h4"
                 component="div"
                 sx={{ mb: 3 }}
               >
@@ -201,10 +207,11 @@ function ProfilePage() {
                 sx={{ mb: 3 }}
               >
                 Add Pet
-              </Button>
+              </Button> 
             </Grid>
           </Grid>
-          <Grid container spacing={2} justifyContent="center">
+          <Grid container spacing={2} justifyContent="center" 
+          sx={{ padding: 2}}>
             {petInfo.map((pets, index) => {
               return (
                 <Grid item xs={2}>
@@ -246,7 +253,12 @@ function ProfilePage() {
           </Grid>
         </Box>
       </div>
-    </div>
+      <Typography gutterBottom
+                sx={{ mt:(40% + 60),ml:(100),bottom:0 }}
+              >
+     <a href="https://www.freepik.com/free-vector/seamless-animal-pattern-background-cute-paw-print-vector-illustration_20266394.htm#query=pet%20pattern&position=13&from_view=search&track=sph">Background Image by rawpixel.com</a> on Freepik
+  </Typography>
+   </div>
   );
 }
 

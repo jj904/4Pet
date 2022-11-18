@@ -1,5 +1,5 @@
 //config for Commetchat
 
-export const APP_ID = "2215328a2218bd41"
+export const APP_ID = "2258196abfaf511e"
 export const APP_REGION = "us"
-export const AUTH_KEY = "c375cc7f814f2e591e0317ccbf102ce73d00e824"
+export const AUTH_KEY = "ef39e1e70a95fd7d5873c734b3f43fa4e0bda974"

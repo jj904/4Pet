@@ -1,25 +1,7 @@
-import React, { useState,useEffect } from "react";
-import {signOutUser } from "../../firebase";
-import Button from "@mui/material/Button";
-import {useAuth} from '../../contexts/AuthContext'
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar";
-import { storage } from "../../firebase";
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  listAll,
-  list,
-  deleteObject,
-} from "firebase/storage";
-import { doc, setDoc, deleteDoc } from "firebase/firestore";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -27,111 +9,164 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { db } from "../../firebase";
 import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-
+import Checkbox from "@mui/material/Checkbox";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { pink } from "@mui/material/colors";
+import backGraoundImage from "../../assets/19085844_v1008-25-b.jpg";
+import Divider from '@mui/material/Divider';
 
 function HomePage() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
-  const [open, setOpen] = useState(false);
-  const [userInfo, setUserInfo] = useState([]);
+  const [petInMyArea, setPetInMyArea] = useState(false);
+  const [userInfo, setUserInfo] = useState(false);
   const [petInfo, setPetInfo] = useState([]);
-  const [image, setImage] = useState(null);
-  const [url, setUrl] = useState([]);
-  const imageListRef = ref(storage, user.uid + "/petImgs/");
-  const [state, setState] = useState([]);
-  const [values, setValues] = useState({
-    petName: "",
-    petType: "",
-  });
+  const label = { inputProps: { "aria-label": "petFavorite" } };
+  const [petType, setPetType] = useState("All");
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handlePetInArea = (event) => {
+    setPetInMyArea(event.target.checked);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const imgChange = (e) => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
-    }
-  };
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleChange = (event) => {
+    setPetType(event.target.value);
   };
 
   const refreshPage = () => {
     window.location.reload(false);
   };
-  const handleDelete = async (urls, petName) => {
-    const desertRef = ref(storage, urls);
-    await deleteDoc(doc(db, "Users", user.uid, "Pets", petName));
-    // Delete the file
-    await deleteObject(desertRef)
-      .then(() => {
-        refreshPage();
-        // File deleted successfully
-      })
-      .catch((error) => {
-        // Uh-oh, an error occurred!
-      });
+
+  const filterPetsTypes = (pets) => {
+    if (petType !== "All") {
+      return pets.filter((pet) => pet.petType === petType);
+    } else {
+      return pets;
+    }
   };
 
-
   useEffect(() => {
-    document.title = "Profile";
+    document.title = "Home";
     if (loading) {
       return;
     }
     if (!user) {
       navigate("/login");
       return;
-    }
-    const fetchData = async () => {
-      fetch(`http://localhost:8080/api/account/${user.uid}`).then(
-        async (res) => {
-          const jsonResult = await res.json();
-          setUserInfo(jsonResult);
+    } else {
+      const fetchData = async () => {
+        fetch(`http://localhost:8080/api/account/${user.uid}`).then(
+          async (res) => {
+            const jsonResult = await res.json();
+            setUserInfo(jsonResult);
+          }
+        );
+        if (petInMyArea) {
+          fetch(`http://localhost:8080/api/feature/search/${userInfo.zipcode}`)
+            .then((response) => response.json())
+            .then((res) => setPetInfo(res));
+          setPetType("All");
+        } else if (petType !== "All") {
+          fetch(`http://localhost:8080/api/pet/search/${petType}`)
+            .then((response) => response.json())
+            .then((res) => setPetInfo(res));
+        } else {
+          fetch(`http://localhost:8080/api/pet`)
+            .then((response) => response.json())
+            .then((res) => setPetInfo(res));
         }
-      );
+      };
+      fetchData();
 
-      fetch(`http://localhost:8080/api/pet`)
-        .then((response) => response.json())
-        .then((res) => setPetInfo(res));
-    };
-    fetchData();
-  }, [user, loading, navigate, error]);
+      /*
+      if (petType !== "All") {
+        setFilterPets(petInfo.filter((pets) => pets.petType === petType));
+      } else {
+        setFilterPets(petInfo);
+      }*/
+    }
+  }, [user, loading, navigate, error, petInMyArea, petType]);
 
   return (
-    <div>
+    <div
+      style={{ backgroundImage: `url(${backGraoundImage})`, height: "100vh",}}
+    >
       <NavBar></NavBar>
-      <Box justifyContent="center" alignItems="center" sx={{ mb: 3, mt: 3 }}>
-        <Typography gutterBottom variant="h4" component="div" sx={{ mb: 3 }}>
-        Welcome!  {userInfo.username}
+      <Grid
+        justifyContent="center"
+        alignItems="center"
+        display="flex"
+        direction="column"
+        sx={{ mb: 1, mt: 3 }}
+      >
+        <Typography  gutterBottom variant="h4" component="div"  sx={{ fontWeight: 'bold'}}>
+          Welcome!
         </Typography>
-      </Box>
-      <div>
+        <Typography gutterBottom variant="h4" component="div" sx={{ fontWeight: 'bold'}}>
+          {userInfo.username}
+        </Typography>
+      </Grid>
+      <Divider  sx={{ mb: 1 }}/>
+      <div style={{ border: "100px solid hidden" }}>
+        <Box justifyContent="flex-end">
+          <Grid container justifyContent="flex-end" display="flex">
+            <FormControl  variant="filled" sx={{m:1, minWidth: 120 }}>
+              <InputLabel id="demo-simple-select-standard-label">
+                Pet Types
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                value={petType}
+                onChange={handleChange}
+                label="petTypes"
+              >
+                <MenuItem value="All">All</MenuItem>
+                <MenuItem value="Dog">Dog</MenuItem>
+                <MenuItem value="Cat">Cat</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControlLabel
+              control={
+                <Checkbox checked={petInMyArea} onChange={handlePetInArea}  sx={{
+                  color: pink[800],
+                  '&.Mui-checked': {
+                    color: pink[600],
+                  },
+                }}/>
+              }
+              label="Show Pet In My Area"
+             
+            />
+          </Grid>
+        </Box>
         <Box>
           <Grid container justifyContent="center" display="flex">
-            <Grid item >
+            <Grid item>
               <Typography
                 gutterBottom
-                variant="h5"
+                variant="h4"
                 component="div"
                 sx={{ mb: 3 }}
               >
-               All Pets
+                {petType}
               </Typography>
             </Grid>
           </Grid>
-          <Grid container spacing={2} justifyContent="center" >
+          <Grid
+            container
+            spacing={2}
+            justifyContent="center"
+            sx={{ padding: 2 }}
+          >
             {petInfo.map((pets, index) => {
               return (
                 <Grid item xs={2}>
@@ -150,7 +185,7 @@ function HomePage() {
                         <Typography gutterBottom variant="h8" component="div">
                           Owner: {pets.user}
                         </Typography>
-                        <Typography gutterBottom variant="h8" component="div"> 
+                        <Typography gutterBottom variant="h8" component="div">
                           Location: {pets.userZip}
                         </Typography>
                       </CardContent>
@@ -164,13 +199,17 @@ function HomePage() {
                       >
                         Type: {pets.petType}
                       </Typography>
-                      <Button
-                        aria-label="delete"
-                        sx={{ marginLeft: "auto" }}
-                        onClick={() => handleDelete(pets.petLink, pets.petName)}
-                      >
-                        <DeleteOutlineIcon />
-                      </Button>
+                      <Checkbox
+                        {...label}
+                        icon={<FavoriteBorder />}
+                        checkedIcon={<Favorite />}
+                        sx={{
+                          color: pink[800],
+                          "&.Mui-checked": {
+                            color: pink[600],
+                          },
+                        }}
+                      />
                     </CardActions>
                   </Card>
                 </Grid>
@@ -179,9 +218,13 @@ function HomePage() {
           </Grid>
         </Box>
       </div>
+      <Typography
+                sx={{ mt:(25% + 60),ml:(100),bottom:0 }}
+              >
+     <a href="https://www.freepik.com/free-vector/seamless-animal-pattern-background-cute-paw-print-vector-illustration_20266394.htm#query=pet%20pattern&position=13&from_view=search&track=sph">Background Image by rawpixel.com</a> on Freepik
+  </Typography> 
     </div>
   );
 }
 
-
-export default HomePage
+export default HomePage;
