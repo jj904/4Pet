@@ -7,6 +7,8 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
+  setPersistence, 
+  browserSessionPersistence
 } from "firebase/auth";
 
 import {
@@ -73,6 +75,9 @@ const registerUser = async (username, email, password, zipcode) => {
 }
 
 const signIn = async (email, password) => {
+  setPersistence(auth, browserSessionPersistence);
+
+  
   const res = await signInWithEmailAndPassword(auth, email, password);
   const user = res.user;
   await CometChat.login(user.uid, CONSTANTS.AUTH_KEY).then(
