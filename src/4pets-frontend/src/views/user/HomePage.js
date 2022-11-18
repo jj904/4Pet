@@ -41,18 +41,6 @@ function HomePage() {
     setPetType(event.target.value);
   };
 
-  const refreshPage = () => {
-    window.location.reload(false);
-  };
-
-  const filterPetsTypes = (pets) => {
-    if (petType !== "All") {
-      return pets.filter((pet) => pet.petType === petType);
-    } else {
-      return pets;
-    }
-  };
-
   useEffect(() => {
     document.title = "Home";
     if (loading) {
@@ -85,13 +73,6 @@ function HomePage() {
         }
       };
       fetchData();
-
-      /*
-      if (petType !== "All") {
-        setFilterPets(petInfo.filter((pets) => pets.petType === petType));
-      } else {
-        setFilterPets(petInfo);
-      }*/
     }
   }, [user, loading, navigate, error, petInMyArea, petType]);
 
