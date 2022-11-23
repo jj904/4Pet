@@ -1,21 +1,15 @@
-import { autocompleteClasses, CssBaseline } from "@mui/material";
+import { autocompleteClasses, Grid,  } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
+import AboutCover from "../../components/AboutCover";
 import AppDescription from "../../components/AppDescription";
 import Header from "../../components/Header";
 import StickyHeader from "../../components/StickyHeader";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: "100%",
-        height: "auto",
-        minHeight: "100vh",
-        backgroundImage: `url("https://wallpaperaccess.com/full/390954.jpg")`,
-        backgroundRepeat:'no-repeat',
-        backgroundSize: 'cover',
-    },
-    body: {
+    container: {
         backgroundColor: 'white',
+        height: "100vh"
     }
     
 }));
@@ -26,8 +20,24 @@ function About(){
     return (
         <div>
             <StickyHeader/>
-            <div className={classes.body}>
-                Contact Page
+            <AboutCover/>
+            <div className={classes.container}>
+            <Grid container spacing={4}>
+                    <Grid item xs={7}>
+                    </Grid>
+                    <Grid item xs={5} sx={{align:'center'}}>
+                            <h1 className={classes.title}> 
+                                Meet <span className={classes.colorText}> 4Pets </span>
+                            </h1>
+                            <p>
+                              4Pets is designed for pet owners to meet fellow pet owners. Whether it be a dog, a cat, or a fish, 
+                              as long as you own a pet, this application is for you.
+                            </p>
+                            <p>
+                              Bond over your animal pals and share a new connection. 
+                            </p>
+                    </Grid>
+                </Grid>
             </div>
         </div>
     );

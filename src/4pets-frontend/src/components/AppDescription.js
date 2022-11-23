@@ -59,7 +59,8 @@ export default function AppDescription () {
                         rowHeight={130}
                         >
                         {itemData.map((item) => (
-                            <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
+                            <ImageListItem 
+                            key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
                             <img
                                 {...srcset(item.img, 121, item.rows, item.cols)}
                                 alt={item.title}
@@ -71,11 +72,14 @@ export default function AppDescription () {
                     </Grid>
                     <Grid item xs={5} sx={{align:'center'}}>
                             <h1 className={classes.title}> 
-                                Meet <span className={classes.colorText}> 4Pets </span>
+                                <span>Meet</span><span className={classes.colorText}> 4Pets </span>
                             </h1>
                             <p>
-                                4Pets is designed for pet owners to meet fellow pet owners. Whether it be a dog, a cat, or a fish, 
-                                as long as you own a pet, this application is for you. <br/> Bond over your animal pals and share a new connection. 
+                              4Pets is designed for pet owners to meet fellow pet owners. Whether it be a dog, a cat, or a fish, 
+                              as long as you own a pet, this application is for you.
+                            </p>
+                            <p>
+                              Bond over your animal pals and share a new connection. 
                             </p>
                     </Grid>
                 </Grid>
@@ -92,61 +96,15 @@ export default function AppDescription () {
 
 const itemData = [
     {
-      img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-      title: 'Breakfast',
-      rows: 2,
+      img: 'https://images.unsplash.com/photo-1579119134757-5c38803f34fc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+      title: 'Dog Kissing',
+      rows: 5,
       cols: 2,
     },
     {
-      img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-      title: 'Burger',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-      title: 'Camera',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-      title: 'Coffee',
-      cols: 2,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-      title: 'Hats',
-      cols: 2,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
-      title: 'Honey',
-      author: '@arwinneil',
-      rows: 2,
-      cols: 2,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-      title: 'Basketball',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-      title: 'Fern',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-      title: 'Mushrooms',
-      rows: 2,
-      cols: 2,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-      title: 'Tomato basil',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-      title: 'Sea star',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-      title: 'Bike',
-      cols: 2,
+      img: 'https://images.unsplash.com/photo-1605464095425-08a9c189e477?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80',
+      title: 'Cat',
+      rows: 5,
+      cols: 2
     },
   ];

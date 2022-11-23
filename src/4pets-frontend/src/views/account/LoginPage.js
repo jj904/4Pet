@@ -11,6 +11,7 @@ import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Collapse from '@mui/material/Collapse';
+import StickyHeader from "../../components/StickyHeader";
 
 function LoginPage() {
   
@@ -70,6 +71,7 @@ function LoginPage() {
         overflow: "hidden",
       }}
     >
+      <StickyHeader/>
       <Collapse in={open}>
       {error && <Alert severity="error"
        action={

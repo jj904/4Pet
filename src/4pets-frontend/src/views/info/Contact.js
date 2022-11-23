@@ -27,7 +27,6 @@ export default function Contact(){
         <div >
             <StickyHeader/>
             <div className={classes.body}>
-                Contact Page
             </div>
         </div>
     );

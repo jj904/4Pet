@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Collapse from '@mui/material/Collapse';
 import axios from "axios"
+import StickyHeader from "../../components/StickyHeader";
 
 function RegisterPage() {
   const {user} = useAuth();
@@ -79,6 +80,7 @@ function RegisterPage() {
         overflow: "hidden",
       }}
     >
+    <StickyHeader/>
     <Collapse in={open}>
       {error && <Alert severity="error"
        action={
