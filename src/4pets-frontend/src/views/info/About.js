@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
     container: {
         backgroundColor: 'white',
         height: "100vh"
+    },
+    colorText: {
+        color: "#ffa7a7"
     }
     
 }));
@@ -27,7 +30,7 @@ function About(){
                     </Grid>
                     <Grid item xs={5} sx={{align:'center'}}>
                             <h1 className={classes.title}> 
-                                Meet <span className={classes.colorText}> 4Pets </span>
+                                The <span className={classes.colorText}> Idea </span>
                             </h1>
                             <p>
                               4Pets is designed for pet owners to meet fellow pet owners. Whether it be a dog, a cat, or a fish, 
