@@ -7,10 +7,14 @@ import Chat from './views/user/Chat';
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import {AuthProvider} from '../src/contexts/AuthContext'
+<<<<<<< HEAD
 import Landing from './views/info/Landing';
 import About from './views/info/About';
 import Contact from './views/info/Contact';
 
+=======
+import ProfilePage from './views/user/ProfilePage';
+>>>>>>> main
 
 
 
@@ -19,6 +23,7 @@ function App() {
     <div className="App">
     <Router>
       <AuthProvider>
+<<<<<<< HEAD
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<HomePage />} />
@@ -29,6 +34,16 @@ function App() {
           <Route path="/forgetPassword" element={<ForgetPassword />} />
           <Route path="/chat" element={<Chat/>} />
         </Routes>
+=======
+      <Routes>
+      <Route  exact path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forgetPassword" element={<ForgetPassword />} />
+        <Route path="/chat" element={<Chat/>} />
+        <Route path="/profile" element={<ProfilePage/>} />
+      </Routes>
+>>>>>>> main
       </AuthProvider>
     </Router>
     </div>

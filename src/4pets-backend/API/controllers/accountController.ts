@@ -24,7 +24,7 @@ export const getAccount = async(req: any, res: any, next: any) => {
         const accRef = db.collection('Users').doc(accountId);
         let doc = await accRef.get();
         if (!doc.exists) {
-            admin.auth().getUserByEmail(accountId).then(async (user) => {
+            admin.auth().getUser(accountId).then(async (user) => {
                     await accRef.set({email: accountId});
                     doc = await accRef.get();
                 })

@@ -4,6 +4,7 @@ export const userInfoScreenStyle = (props) =>{
         display: "flex",
         flexDirection: "column!important",
         height: "calc(100% - 50px)",
+        backgroundColor: "#ffa7a7",
         fontFamily: `${props.theme.fontFamily}`,
         "*": {
             boxSizing: "border-box",

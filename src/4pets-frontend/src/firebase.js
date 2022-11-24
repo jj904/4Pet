@@ -7,6 +7,8 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
+  setPersistence, 
+  browserSessionPersistence
 } from "firebase/auth";
 
 import {
@@ -16,7 +18,7 @@ import {
 } from "firebase/firestore";
 import * as CONSTANTS from "./contexts/Constants.js"
 import { CometChat } from "@cometchat-pro/chat";
-
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAEP0N6AfQ5Vde025mJGBG5AVP-V-FMXO8",
@@ -32,6 +34,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+
+const storage = getStorage(app);
+
 
 const registerUser = async (username, email, password, zipcode) => {
   const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -54,6 +59,14 @@ const registerUser = async (username, email, password, zipcode) => {
             console.log("error", error);
         }
     )
+    await CometChat.login(user.uid, CONSTANTS.AUTH_KEY).then(
+      users => {
+        console.log("Login Successful:", { users });    
+      },
+      error => {
+        console.log("Login failed with exception:", { error });    
+      }
+    );
 
 
   } catch (e) {
@@ -62,6 +75,9 @@ const registerUser = async (username, email, password, zipcode) => {
 }
 
 const signIn = async (email, password) => {
+  setPersistence(auth, browserSessionPersistence);
+
+  
   const res = await signInWithEmailAndPassword(auth, email, password);
   const user = res.user;
   await CometChat.login(user.uid, CONSTANTS.AUTH_KEY).then(
@@ -72,11 +88,12 @@ const signIn = async (email, password) => {
       console.log("Login failed with exception:", { error });    
     }
   );
-
+  
 };
 
 const signOutUser = () => {
   signOut(auth);
+  CometChat.logout();
 };
 
 const resetPassword = async (email) => {
@@ -88,6 +105,7 @@ const resetPassword = async (email) => {
 export {
   auth,
   db,
+  storage,
   signIn,
   registerUser,
   resetPassword,

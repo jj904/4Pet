@@ -1,0 +1,31 @@
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+
+const API_KEY = 'js-9a3c27efa25ed3045c89f6673c202451';
+
+export const zip = async (zipcode: string) => {
+    
+    // call hotels4 locations/v2/search endpoint
+    console.log(zipcode.toString);
+    console.log("zip featureservices");
+    console.log("https://service.zipapi.us/zipcode/95035?X-API-KEY=" + API_KEY);
+    const cringe = "https://service.zipapi.us/zipcode/95035?X-API-KEY=" + API_KEY;
+    const options: AxiosRequestConfig = {
+      method: 'GET',
+      url: "https://service.zipapi.us/zipcode/95035",
+      headers: {
+        'X-API-KEY': API_KEY
+      }
+    //   params: {
+    //     query: zipcode
+    //   }
+    }
+    console.log(options)
+    console.log("past options");
+    let resp: AxiosResponse = await axios.request(cringe);
+    console.log("letter");
+    if (resp.status == 429) {
+        resp = await axios.request(cringe);
+    }
+    console.log("fin");
+    return resp;
+  }

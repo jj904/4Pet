@@ -13,6 +13,7 @@ function Chat() {
   const [error, setError] = useState();
 
  useEffect(() => {
+  document.title = "Chat";  
     if (loading) {
       return;
     }

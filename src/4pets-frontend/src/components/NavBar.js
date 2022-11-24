@@ -16,16 +16,20 @@ import { Link,useNavigate } from "react-router-dom";
 import { signOutUser } from "../firebase";
 import {useAuth} from '../contexts/AuthContext'
 
-
-const pages = ['Chat',];
-const settings = ['Profile', 'Logout'];
-
 const NavBar = () => {
   const navigate = useNavigate();
   const {user} = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
-  const [open, setOpen] = useState(true);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [userId, setUserId] = useState([]);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     if (loading) {
@@ -35,11 +39,18 @@ const NavBar = () => {
       navigate("/login");
       return;
     } 
+    const fetchData = async () =>{
+      fetch(`http://localhost:8080/api/account/${user.uid}`).then(async (res) =>{
+        const jsonResult = await res.json();
+        setUserId(jsonResult);
+      })
+    }
+    fetchData();
   }, [user, loading, navigate, error, open]);
 
   return (
     
-    <AppBar position="static">
+    <AppBar position="static" sx={{background: '#ffa7a7'}}>
        <Container maxWidth="xl">
       <Toolbar disableGutters >
         <Typography 
@@ -58,19 +69,33 @@ const NavBar = () => {
           4Pets
         </Typography>
         <MenuItem >
-           <Link to="/chat"  color="inherit" >Chat </Link>
+           <Link to="/chat" style={{color:"white" ,textDecoration:'none' }} >Chat </Link>
         </MenuItem>
-        <Box sx={{ flexGrow: 0 }}>
+        <Box sx={{ flexGrow: 1 }} />
+        <Box  sx={{ display: { xs: 'none', md: 'flex' } }}>
         <Button
-              variant="contained"
-              color="primary"
-              sx={{ position: "relative" }}
-              type="logout"
-              onClick={signOutUser}
-            >
-              Logout
-        </Button>
-        </Box>
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        sx={{ color: 'white'}}
+        onClick={handleClick}
+      >
+          {userId.username }
+      </Button>  
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose}><Link to="/profile"  style={{color:"black" ,textDecoration:'none' }} >Profile </Link></MenuItem>
+        <MenuItem onClick={signOutUser}>Logout</MenuItem>
+      </Menu>
+      </Box>
       </Toolbar>
       </Container>
     </AppBar>

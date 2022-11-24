@@ -78,43 +78,7 @@ class CometChatUserProfile extends React.Component {
 							</p>
 						</div>
 					</div>
-					<div css={optionsStyle()} className="userinfo__options">
-						<div css={optionTitleStyle(this.props)} className="options__title">
-							{Translator.translate("PREFERENCES", this.props.lang)}
-						</div>
-						<div css={optionListStyle()} className="options_list">
-							<div css={optionStyle(notificationIcon)} className="option option-notification">
-								<div css={optionNameStyle()} className="option_name">
-									{Translator.translate("NOTIFICATIONS", this.props.lang)}
-								</div>
-							</div>
-							<div css={optionStyle(privacyIcon)} className="option option-privacy">
-								<div css={optionNameStyle()} className="option_name">
-									{Translator.translate("PRIVACY_AND_SECURITY", this.props.lang)}
-								</div>
-							</div>
-							<div css={optionStyle(chatIcon)} className="option option-chats">
-								<div css={optionNameStyle()} className="option_name">
-									{Translator.translate("CHATS", this.props.lang)}
-								</div>
-							</div>
-						</div>
-						<div css={optionTitleStyle(this.props)} className="options__title">
-							{Translator.translate("OTHER", this.props.lang)}
-						</div>
-						<div css={optionListStyle()} className="options_list">
-							<div css={optionStyle(helpIcon)} className="option option-help">
-								<div css={optionNameStyle()} className="option_name">
-									{Translator.translate("HELP", this.props.lang)}
-								</div>
-							</div>
-							<div css={optionStyle(reportIcon)} className="option option-report">
-								<div css={optionNameStyle()} className="option_name">
-									{Translator.translate("REPORT_PROBLEM", this.props.lang)}
-								</div>
-							</div>
-						</div>
-					</div>
+
 				</React.Fragment>
 			);
 		}
