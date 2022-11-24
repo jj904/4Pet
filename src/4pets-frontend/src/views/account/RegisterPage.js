@@ -12,11 +12,8 @@ import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Collapse from '@mui/material/Collapse';
-<<<<<<< HEAD
 import axios from "axios"
 import StickyHeader from "../../components/StickyHeader";
-=======
->>>>>>> main
 
 function RegisterPage() {
   const {user} = useAuth();
@@ -80,6 +77,13 @@ function RegisterPage() {
       }}
     >
     <StickyHeader/>
+    <Grid
+    justifyContent="center"
+    alignItems="center"
+    display="flex"
+    direction="column"
+    sx={{ mt: 8 }}
+  >
     <Collapse in={open}>
       {error && <Alert severity="error"
        action={
@@ -96,7 +100,8 @@ function RegisterPage() {
       }>
         {error}</Alert>}
         </Collapse>
-      <div style={{ width: "400px", margin: "200px auto" }}>
+        </Grid>
+      <div style={{ width: "400px", margin: "100px auto" }}>
         <Typography variant="h3" align="center" sx={{ mb: 1 }}>
           Register
         </Typography>

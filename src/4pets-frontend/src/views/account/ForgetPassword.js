@@ -11,6 +11,7 @@ import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Collapse from '@mui/material/Collapse';
+import StickyHeader from "../../components/StickyHeader";
 
 function ForgetPassword() {
   const navigate = useNavigate();
@@ -28,8 +29,7 @@ function ForgetPassword() {
       return;
     }
     if (user){
-      alert("welcome!");
-      navigate("/")
+      navigate("/home")
       return;
     }
   }, [user, loading, navigate, error, open]);
@@ -67,8 +67,14 @@ function ForgetPassword() {
         backgroundColor: "#ffa7a7",
         overflow: "hidden",
       }}
-    >
-
+    ><StickyHeader/>
+    <Grid
+    justifyContent="center"
+    alignItems="center"
+    display="flex"
+    direction="column"
+    sx={{ mt: 8 }}
+  >
 <Collapse in={open}>
       {error && <Alert severity="error"
        action={
@@ -85,8 +91,8 @@ function ForgetPassword() {
       }>
         {error}</Alert>}
         </Collapse>
-
-      <div style={{ width: "400px", margin: "200px auto" }}>
+</Grid>
+      <div style={{ width: "400px", margin: "150px auto" }}>
         <Typography variant="h3" align="center" sx={{ mb: 1 }}>
           Reset Password
         </Typography>

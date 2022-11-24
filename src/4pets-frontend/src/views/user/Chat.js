@@ -18,7 +18,7 @@ function Chat() {
       return;
     }
     if (!user){
-      navigate("/login")
+      navigate("/")
       return;
     }
   }, [user, loading, navigate, error]);
