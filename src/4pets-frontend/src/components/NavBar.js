@@ -50,7 +50,9 @@ const NavBar = () => {
 
   return (
     
-    <AppBar position="static" sx={{background: '#ffa7a7'}}>
+    <AppBar position="static" sx={{            bgcolor: '#ffa7a7',
+    boxShadow: "none",
+    height: '8vh'}}>
        <Container maxWidth="xl">
       <Toolbar disableGutters >
         <Typography 
@@ -62,14 +64,15 @@ const NavBar = () => {
                       mr: 2,
                       display: { xs: 'none', md: 'flex' },
                       fontFamily: 'monospace',
-                      fontWeight: 700,
+                      fontWeight: 'bold',
                       color: 'inherit',
                       textDecoration: 'none',
                     }}>
           4Pets
         </Typography>
         <MenuItem >
-           <Link to="/chat" style={{color:"white" ,textDecoration:'none' }} >Chat </Link>
+           <Link to="/chat" style={{color:"white" ,textDecoration:'none', fontWeight: 'bold',
+                            fontSize: '1rem', }} >Chat </Link>
         </MenuItem>
         <Box sx={{ flexGrow: 1 }} />
         <Box  sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -78,7 +81,8 @@ const NavBar = () => {
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        sx={{ color: 'white'}}
+        sx={{ color: 'white',  fontWeight: 'bold',
+        fontSize: '1rem',}}
         onClick={handleClick}
       >
           {userId.username }
@@ -91,9 +95,12 @@ const NavBar = () => {
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
+        
       >
-        <MenuItem onClick={handleClose}><Link to="/profile"  style={{color:"black" ,textDecoration:'none' }} >Profile </Link></MenuItem>
-        <MenuItem onClick={signOutUser}>Logout</MenuItem>
+        <MenuItem sx={{ fontWeight: 'bold',
+        fontSize: '1rem',}} onClick={handleClose}><Link to="/profile"  style={{color:"black" ,textDecoration:'none' }} >Profile </Link></MenuItem>
+        <MenuItem sx={{ fontWeight: 'bold',
+        fontSize: '1rem',}} onClick={signOutUser}>Logout</MenuItem>
       </Menu>
       </Box>
       </Toolbar>

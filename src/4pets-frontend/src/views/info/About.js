@@ -1,10 +1,10 @@
 import { autocompleteClasses, Grid,  } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React from "react";
 import AboutCover from "../../components/AboutCover";
 import AppDescription from "../../components/AppDescription";
 import Header from "../../components/Header";
 import StickyHeader from "../../components/StickyHeader";
+import React, { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
 
 function About(){
     const classes = useStyles();
-
+    useEffect(() => {
+        document.title = "About";
+    })
     return (
         <div>
             <StickyHeader/>
