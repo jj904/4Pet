@@ -109,19 +109,24 @@ function HomePage() {
                 value={petType}
                 onChange={handleChange}
                 label="petTypes"
+                sx={{ fontWeight: 'bold',
+        fontSize: '1rem',}}
               >
-                <MenuItem value="All">All</MenuItem>
-                <MenuItem value="Dog">Dog</MenuItem>
-                <MenuItem value="Cat">Cat</MenuItem>
+                <MenuItem sx={{ fontWeight: 'bold',
+        fontSize: '1rem',}}value="All">All</MenuItem>
+                <MenuItem sx={{ fontWeight: 'bold',
+        fontSize: '1rem',}}value="Dog">Dog</MenuItem>
+                <MenuItem sx={{ fontWeight: 'bold',
+        fontSize: '1rem',}}value="Cat">Cat</MenuItem>
               </Select>
             </FormControl>
             <FormControlLabel
               control={
-                <Checkbox checked={petInMyArea} onChange={handlePetInArea}  sx={{
+                <Checkbox  checked={petInMyArea} onChange={handlePetInArea}  sx={{ 
                   color: pink[800],
                   '&.Mui-checked': {
-                    color: pink[600],
-                  },
+                    color: pink[600]
+                  },  
                 }}/>
               }
               label="Show Pet In My Area"
@@ -136,7 +141,7 @@ function HomePage() {
                 gutterBottom
                 variant="h4"
                 component="div"
-                sx={{ mb: 3 }}
+                sx={{ mb: 3 ,}}
               >
                 {petType}
               </Typography>

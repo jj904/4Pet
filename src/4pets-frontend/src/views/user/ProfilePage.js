@@ -154,7 +154,7 @@ function ProfilePage() {
       </Grid>
       <Divider  sx={{ mb: 1 }}/>
       <div>
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog  open={open} onClose={handleClose}>
           <DialogTitle>Add Pet</DialogTitle>
           <DialogContent>
             <TextField
@@ -183,8 +183,22 @@ function ProfilePage() {
             <input type="file" onChange={imgChange} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleUpload}>Submit</Button>
+            <Button sx={{color:'#ffa7a7',
+                        fontWeight: 'bold',
+                        fontSize: '1rem',
+                        backgroundColor: '#ffffff',
+                        borderRadius: '12px',
+                        border: 'none',
+                        transition: "all 150ms ease",
+                        cursor: "pointer"}} onClick={handleClose}>Cancel</Button>
+            <Button sx={{color:'#ffa7a7',
+                        fontWeight: 'bold',
+                        fontSize: '1rem',
+                        backgroundColor: '#ffffff',
+                        borderRadius: '12px',
+                        border: 'none',
+                        transition: "all 150ms ease",
+                        cursor: "pointer"}}onClick={handleUpload}>Submit</Button>
           </DialogActions>
         </Dialog>
 
@@ -202,9 +216,15 @@ function ProfilePage() {
             </Grid>
             <Grid item xs={0.9}>
               <Button
-                variant="outlined"
                 onClick={handleClickOpen}
-                sx={{ mb: 3 }}
+                sx={{ mb: 3 ,  color:'#ffa7a7',
+                fontWeight: 'bold',
+                fontSize: '1rem',
+                backgroundColor: '#ffffff',
+                borderRadius: '12px',
+                border: 'none',
+                transition: "all 150ms ease",
+                cursor: "pointer",}}
               >
                 Add Pet
               </Button> 
@@ -240,8 +260,16 @@ function ProfilePage() {
                       </Typography>
                       <Button
                         aria-label="delete"
-                        sx={{ marginLeft: "auto" }}
+                        sx={{ marginLeft: "auto"  , color:'#ffa7a7',
+                        fontWeight: 'bold',
+                        fontSize: '1rem',
+                        backgroundColor: '#ffffff',
+                        borderRadius: '12px',
+                        border: 'none',
+                        transition: "all 150ms ease",
+                        cursor: "pointer",}}
                         onClick={() => handleDelete(pets.petLink, pets.petName)}
+                        
                       >
                         <DeleteOutlineIcon />
                       </Button>

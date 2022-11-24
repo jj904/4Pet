@@ -180,8 +180,16 @@ function RegisterPage() {
 
             <Button
               variant="contained"
-              color="primary"
-              sx={{ position: "relative", mb: 2 }}
+
+              sx={{ position: "relative", mb: 2,
+              color:'#ffa7a7',
+              fontWeight: 'bold',
+              fontSize: '1rem',
+              backgroundColor: '#ffffff',
+              borderRadius: '12px',
+              border: 'none',
+              transition: "all 150ms ease",
+              cursor: "pointer" }}
               disable={loading}
               type="submit"
             >

@@ -26,7 +26,7 @@ function LoginPage() {
   });
 
  useEffect(() => {
-  document.title = "Login";  
+  document.title = "Sign In";  
     if (loading) {
       return;
     }
@@ -98,7 +98,7 @@ function LoginPage() {
         </Grid>
       <div style={{ width: "400px", margin: "100px auto" }}>
         <Typography variant="h3" align="center" sx={{ mb: 1 }}>
-          Welcome!
+          Sign In
         </Typography>
         <Grid
           container
@@ -140,9 +140,15 @@ function LoginPage() {
       
             <Button
               variant="contained"
-              color="primary"
             
-              sx={{ position: "relative",mb: 2  }}
+              sx={{ position: "relative",mb: 2 , color:'#ffa7a7',
+              fontWeight: 'bold',
+              fontSize: '1rem',
+              backgroundColor: '#ffffff',
+              borderRadius: '12px',
+              border: 'none',
+              transition: "all 150ms ease",
+              cursor: "pointer" }}
               disable={values.loading}
               type="submit"
             >

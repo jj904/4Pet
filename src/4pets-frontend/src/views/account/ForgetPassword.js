@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { Link,useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import {resetPassword } from "../../firebase";
-import {useAuth} from '../../contexts/AuthContext'
+import { resetPassword } from "../../firebase";
+import { useAuth } from '../../contexts/AuthContext'
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -15,7 +15,7 @@ import StickyHeader from "../../components/StickyHeader";
 
 function ForgetPassword() {
   const navigate = useNavigate();
-  const {user} = useAuth();
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const [open, setOpen] = useState(true);
@@ -24,11 +24,11 @@ function ForgetPassword() {
   });
 
   useEffect(() => {
-    document.title = "Forget Password";  
+    document.title = "Forget Password";
     if (loading) {
       return;
     }
-    if (user){
+    if (user) {
       navigate("/home")
       return;
     }
@@ -40,20 +40,20 @@ function ForgetPassword() {
   };
 
 
-  
- async function handleSubmit(event){
+
+  async function handleSubmit(event) {
     event.preventDefault();
     try {
       setError('')
       setOpen(false)
-      setLoading (true)
+      setLoading(true)
       await resetPassword(values.email)
     }
-   catch {
-    setError('Fail Reset Password')
-    setOpen(true)
-    setLoading (false)
-   }
+    catch {
+      setError('Fail Reset Password')
+      setOpen(true)
+      setLoading(false)
+    }
   };
 
 
@@ -67,31 +67,31 @@ function ForgetPassword() {
         backgroundColor: "#ffa7a7",
         overflow: "hidden",
       }}
-    ><StickyHeader/>
-    <Grid
-    justifyContent="center"
-    alignItems="center"
-    display="flex"
-    direction="column"
-    sx={{ mt: 8 }}
-  >
-<Collapse in={open}>
-      {error && <Alert severity="error"
-       action={
-        <IconButton
-          aria-label="close"
-          color="inherit"
-          size="small"
-          onClick={() => {
-            setOpen(false);
-          }}
-        >
-          <CloseIcon fontSize="inherit" />
-        </IconButton>
-      }>
-        {error}</Alert>}
+    ><StickyHeader />
+      <Grid
+        justifyContent="center"
+        alignItems="center"
+        display="flex"
+        direction="column"
+        sx={{ mt: 8 }}
+      >
+        <Collapse in={open}>
+          {error && <Alert severity="error"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }>
+            {error}</Alert>}
         </Collapse>
-</Grid>
+      </Grid>
       <div style={{ width: "400px", margin: "150px auto" }}>
         <Typography variant="h3" align="center" sx={{ mb: 1 }}>
           Reset Password
@@ -103,9 +103,11 @@ function ForgetPassword() {
           alignItems="center"
         >
           <Box
-            sx={{ width: "28ch", mb: 1,display: "flex",
-            flexDirection: "column",
-            alignItems: "center" }}
+            sx={{
+              width: "28ch", mb: 1, display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
             variant="standard"
             component="form"
             noValidate
@@ -121,19 +123,26 @@ function ForgetPassword() {
               value={values.email}
               onChange={handleChange("email")}
             />
-      
+
             <Button
               variant="contained"
-              color="primary"
-            
-              sx={{ position: "relative",mb: 2  }}
+              sx={{
+                position: "relative", mb: 2, color:'#ffa7a7',
+                fontWeight: 'bold',
+                fontSize: '1rem',
+                backgroundColor: '#ffffff',
+                borderRadius: '12px',
+                border: 'none',
+                transition: "all 150ms ease",
+                cursor: "pointer" 
+              }}
               disable={values.loading}
               type="submit"
             >
               Reset
             </Button>
             <small>
-               <Link to="/Login">Login</Link>
+              <Link to="/Login">Login</Link>
             </small>
           </Box>
         </Grid>
