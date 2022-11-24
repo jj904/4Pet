@@ -114,7 +114,7 @@ function ProfilePage() {
       return;
     }
     if (!user) {
-      navigate("/login");
+      navigate("/");
       return;
     }else{
       const fetchData = async () => {
@@ -135,7 +135,7 @@ function ProfilePage() {
   }, [user, loading, navigate, error]);
 
   return (
-    <div style={{ backgroundImage: `url(${backGraoundImage})`, height: "100vh" }}>
+    <div style={{ backgroundImage: `url(${backGraoundImage})`, height: "100vh", backgroundSize: 'cover' }}>
       <NavBar></NavBar>
       <Grid justifyContent="center"
         alignItems="center"
@@ -253,11 +253,14 @@ function ProfilePage() {
           </Grid>
         </Box>
       </div>
-      <Typography gutterBottom
-                sx={{ mt:(40% + 60),ml:(100),bottom:0 }}
+      <footer style={{ position: "absolute",
+  bottom: "0",
+  width: "100%",
+  height: "2.5rem"  }}
+               
               >
      <a href="https://www.freepik.com/free-vector/seamless-animal-pattern-background-cute-paw-print-vector-illustration_20266394.htm#query=pet%20pattern&position=13&from_view=search&track=sph">Background Image by rawpixel.com</a> on Freepik
-  </Typography>
+     </footer>
    </div>
   );
 }
