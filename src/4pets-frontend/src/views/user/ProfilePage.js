@@ -26,8 +26,8 @@ import { CardActionArea } from "@mui/material";
 import { db } from "../../firebase";
 import CardActions from "@mui/material/CardActions";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import backGraoundImage from "../../assets/19085844_v1008-25-b.jpg"; 
-import Divider from '@mui/material/Divider';
+import backGraoundImage from "../../assets/19085844_v1008-25-b.jpg";
+import Divider from "@mui/material/Divider";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -118,32 +118,40 @@ function ProfilePage() {
     if (!user) {
       navigate("/");
       return;
-    }else{
+    } else {
       const fetchData = async () => {
-      fetch(`http://localhost:8080/api/account/${user.uid}`).then(
-        async (res) => {
-          const jsonResult = await res.json();
-          setUserInfo(jsonResult);
-        }
-      );
+        fetch(`http://localhost:8080/api/account/${user.uid}`).then(
+          async (res) => {
+            const jsonResult = await res.json();
+            setUserInfo(jsonResult);
+          }
+        );
 
-      fetch(`http://localhost:8080/api/pet/${user.uid}`)
-        .then((response) => response.json())
-        .then((res) => setPetInfo(res));
-    };
-    fetchData();
+        fetch(`http://localhost:8080/api/pet/${user.uid}`)
+          .then((response) => response.json())
+          .then((res) => setPetInfo(res));
+      };
+      fetchData();
     }
-    
   }, [user, loading, navigate, error]);
 
   return (
-    <div style={{ backgroundImage: `url(${backGraoundImage})`, height: "100vh", backgroundSize: 'cover' }}>
+    <div
+      className="profile_page"
+      style={{
+        backgroundImage: `url(${backGraoundImage})`,
+        height: "100vh",
+        backgroundSize: "cover",
+      }}
+    >
       <NavBar></NavBar>
-      <Grid justifyContent="center"
+      <Grid
+        justifyContent="center"
         alignItems="center"
         display="flex"
         direction="column"
-        sx={{  mt: 3 }}>
+        sx={{ mt: 3 }}
+      >
         <Typography gutterBottom variant="h4" component="div" sx={{ mb: 1 }}>
           {userInfo.username}
         </Typography>
@@ -154,9 +162,9 @@ function ProfilePage() {
           Location: {userInfo.zipcode}
         </Typography>
       </Grid>
-      <Divider  sx={{ mb: 1 }}/>
+      <Divider sx={{ mb: 1 }} />
       <div>
-        <Dialog  open={open} onClose={handleClose}>
+        <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Add Pet</DialogTitle>
           <DialogContent>
             <TextField
@@ -185,22 +193,36 @@ function ProfilePage() {
             <input type="file" onChange={imgChange} />
           </DialogContent>
           <DialogActions>
-            <Button sx={{color:'#ffa7a7',
-                        fontWeight: 'bold',
-                        fontSize: '1rem',
-                        backgroundColor: '#ffffff',
-                        borderRadius: '12px',
-                        border: 'none',
-                        transition: "all 150ms ease",
-                        cursor: "pointer"}} onClick={handleClose}>Cancel</Button>
-            <Button sx={{color:'#ffa7a7',
-                        fontWeight: 'bold',
-                        fontSize: '1rem',
-                        backgroundColor: '#ffffff',
-                        borderRadius: '12px',
-                        border: 'none',
-                        transition: "all 150ms ease",
-                        cursor: "pointer"}}onClick={handleUpload}>Submit</Button>
+            <Button
+              sx={{
+                color: "#ffa7a7",
+                fontWeight: "bold",
+                fontSize: "1rem",
+                backgroundColor: "#ffffff",
+                borderRadius: "12px",
+                border: "none",
+                transition: "all 150ms ease",
+                cursor: "pointer",
+              }}
+              onClick={handleClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              sx={{
+                color: "#ffa7a7",
+                fontWeight: "bold",
+                fontSize: "1rem",
+                backgroundColor: "#ffffff",
+                borderRadius: "12px",
+                border: "none",
+                transition: "all 150ms ease",
+                cursor: "pointer",
+              }}
+              onClick={handleUpload}
+            >
+              Submit
+            </Button>
           </DialogActions>
         </Dialog>
 
@@ -219,21 +241,28 @@ function ProfilePage() {
             <Grid item xs={0.9}>
               <Button
                 onClick={handleClickOpen}
-                sx={{ mb: 3 ,  color:'#ffa7a7',
-                fontWeight: 'bold',
-                fontSize: '1rem',
-                backgroundColor: '#ffffff',
-                borderRadius: '12px',
-                border: 'none',
-                transition: "all 150ms ease",
-                cursor: "pointer",}}
+                sx={{
+                  mb: 3,
+                  color: "#ffa7a7",
+                  fontWeight: "bold",
+                  fontSize: "1rem",
+                  backgroundColor: "#ffffff",
+                  borderRadius: "12px",
+                  border: "none",
+                  transition: "all 150ms ease",
+                  cursor: "pointer",
+                }}
               >
                 Add Pet
-              </Button> 
+              </Button>
             </Grid>
           </Grid>
-          <Grid container spacing={2} justifyContent="center" 
-          sx={{ padding: 2}}>
+          <Grid
+            container
+            spacing={2}
+            justifyContent="center"
+            sx={{ padding: 2 }}
+          >
             {petInfo.map((pets, index) => {
               return (
                 <Grid item xs={2}>
@@ -262,16 +291,18 @@ function ProfilePage() {
                       </Typography>
                       <Button
                         aria-label="delete"
-                        sx={{ marginLeft: "auto"  , color:'#ffa7a7',
-                        fontWeight: 'bold',
-                        fontSize: '1rem',
-                        backgroundColor: '#ffffff',
-                        borderRadius: '12px',
-                        border: 'none',
-                        transition: "all 150ms ease",
-                        cursor: "pointer",}}
+                        sx={{
+                          marginLeft: "auto",
+                          color: "#ffa7a7",
+                          fontWeight: "bold",
+                          fontSize: "1rem",
+                          backgroundColor: "#ffffff",
+                          borderRadius: "12px",
+                          border: "none",
+                          transition: "all 150ms ease",
+                          cursor: "pointer",
+                        }}
                         onClick={() => handleDelete(pets.petLink, pets.petName)}
-                        
                       >
                         <DeleteOutlineIcon />
                       </Button>
@@ -283,15 +314,20 @@ function ProfilePage() {
           </Grid>
         </Box>
       </div>
-      <footer style={{ position: "absolute",
-  bottom: "0",
-  width: "100%",
-  height: "2.5rem"  }}
-               
-              >
-     <a href="https://www.freepik.com/free-vector/seamless-animal-pattern-background-cute-paw-print-vector-illustration_20266394.htm#query=pet%20pattern&position=13&from_view=search&track=sph">Background Image by rawpixel.com</a> on Freepik
-     </footer>
-   </div>
+      <footer
+        style={{
+          position: "absolute",
+          bottom: "0",
+          width: "100%",
+          height: "2.5rem",
+        }}
+      >
+        <a href="https://www.freepik.com/free-vector/seamless-animal-pattern-background-cute-paw-print-vector-illustration_20266394.htm#query=pet%20pattern&position=13&from_view=search&track=sph">
+          Background Image by rawpixel.com
+        </a>{" "}
+        on Freepik
+      </footer>
+    </div>
   );
 }
 
