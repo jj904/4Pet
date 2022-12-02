@@ -9,9 +9,9 @@
 # Sample Demo Screenshots 
 
 # Folder structure
--src
-• 4pets-frontend 
-• 4pets-backend 
+- src
+- • 4pets-frontend 
+- • 4pets-backend 
 • Readme
 
 # Live Demo
@@ -21,12 +21,12 @@
 -   Download and Install Node.js
 
 Initiate and run Backend
-- cd .\src\4pets-backend\
-- npm i
-- npm run build:start
+-   `cd .\src\4pets-backend\`
+-   `npm i`
+-   `npm run build:start`
 
 Initiate and run Frontend
-`cd .\src\4pets-frontend\`
-`npm i --force`
-`npm run start`
-- Access http://localhost:3000 in the browser
+-   `cd .\src\4pets-frontend\`
+-   `npm i --force`
+-   `npm run start`
+-   Access http://localhost:3000 in the browser
