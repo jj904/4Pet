@@ -26,7 +26,7 @@ Initiate and run Backend
 - npm run build:start
 
 Initiate and run Frontend
-`cd .\src\4pets-frontend\'
-'npm i --force'
-'npm run start'
+`cd .\src\4pets-frontend\`
+`npm i --force`
+`npm run start`
 - Access http://localhost:3000 in the browser
