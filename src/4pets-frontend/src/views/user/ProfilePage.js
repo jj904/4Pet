@@ -25,7 +25,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { db } from "../../firebase";
 import CardActions from "@mui/material/CardActions";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ClearIcon from '@mui/icons-material/Clear';
 import backGraoundImage from "../../assets/19085844_v1008-25-b.jpg";
 import Divider from "@mui/material/Divider";
 
@@ -304,7 +304,7 @@ function ProfilePage() {
                         }}
                         onClick={() => handleDelete(pets.petLink, pets.petName)}
                       >
-                        <DeleteOutlineIcon />
+                        <ClearIcon />
                       </Button>
                     </CardActions>
                   </Card>
