@@ -26,7 +26,6 @@ function HomePage() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
   const [petInMyArea, setPetInMyArea] = useState(false);
   const [userInfo, setUserInfo] = useState(false);
   const [petInfo, setPetInfo] = useState([]);
@@ -74,7 +73,7 @@ function HomePage() {
       };
       fetchData();
     }
-  }, [user, loading, navigate, error, petInMyArea, petType]);
+  }, [user, loading, navigate, petInMyArea, petType]);
 
   return (
     <div
