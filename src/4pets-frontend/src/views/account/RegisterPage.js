@@ -12,11 +12,8 @@ import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Collapse from '@mui/material/Collapse';
-<<<<<<< HEAD
 import axios from "axios"
 import StickyHeader from "../../components/StickyHeader";
-=======
->>>>>>> main
 
 function RegisterPage() {
   const {user} = useAuth();
