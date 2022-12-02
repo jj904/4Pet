@@ -4,7 +4,7 @@
 ## Team Members: Gaeun Jung, Alan Nguyen, Paul Junver Soriano, JianBin Wu
 
 # Project Introduction 
--The main goal of the project was to create a web application that allowed users with pets to find others near them that also had pets and allowed them to meet and interact with one another. Some objectives that we aimed to achieve along the way were to allow people to create and modify their profiles and to be able chat with others on our application.
+The main goal of the project was to create a web application that allowed users with pets to find others near them that also had pets and allowed them to meet and interact with one another. Some objectives that we aimed to achieve along the way were to allow people to create and modify their profiles and to be able chat with others on our application.
 
 # Sample Demo Screenshots 
 - Landing
@@ -38,6 +38,7 @@
 - Readme
 
 # Live Demo
+https://www.youtube.com/watch?v=xBTEQBTefMM
 
 # Instructions to run the project locally.
 -   Download this project and unzip it in a folder
