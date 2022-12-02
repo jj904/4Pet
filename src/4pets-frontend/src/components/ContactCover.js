@@ -67,8 +67,8 @@ export default function AboutCover(){
         >
             <div className={classes.container}>
                 <h1 className={classes.title}> 
-                    Meet <br />
-                    <span className={classes.colorText}> 4Pets </span>
+                    Meet the <br />
+                    <span className={classes.colorText}> app creators </span>
                 </h1>
             </div>
         </Collapse>

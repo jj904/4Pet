@@ -12,6 +12,7 @@ import About from "./views/info/About";
 import Contact from "./views/info/Contact";
 import ProfilePage from "./views/user/ProfilePage";
 
+
 function App() {
   return (
     <div className="App">
