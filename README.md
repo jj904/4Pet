@@ -9,6 +9,7 @@
 # Sample Demo Screenshots 
 
 # Folder structure
+-src
 • 4pets-frontend 
 • 4pets-backend 
 • Readme
