@@ -17,6 +17,7 @@
 # Instructions to run the project locally.
 -   Download this project and unzip it in a folder
 -   Download and Install Node.js
+
 Initiate and run Backend
 cd .\src\4pets-backend\
 npm i
