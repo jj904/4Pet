@@ -6,11 +6,11 @@ import { Link, useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { resetPassword } from "../../firebase";
-import { useAuth } from '../../contexts/AuthContext'
-import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import Collapse from '@mui/material/Collapse';
+import { useAuth } from "../../contexts/AuthContext";
+import Alert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Collapse from "@mui/material/Collapse";
 import StickyHeader from "../../components/StickyHeader";
 
 function ForgetPassword() {
@@ -29,34 +29,28 @@ function ForgetPassword() {
       return;
     }
     if (user) {
-      navigate("/home")
+      navigate("/home");
       return;
     }
   }, [user, loading, navigate, error, open]);
-
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
-
-
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      setError('')
-      setOpen(false)
-      setLoading(true)
-      await resetPassword(values.email)
+      setError("");
+      setOpen(false);
+      setLoading(true);
+      await resetPassword(values.email);
+    } catch {
+      setError("Fail Reset Password");
+      setOpen(true);
+      setLoading(false);
     }
-    catch {
-      setError('Fail Reset Password')
-      setOpen(true)
-      setLoading(false)
-    }
-  };
-
-
+  }
 
   return (
     <div
@@ -67,7 +61,8 @@ function ForgetPassword() {
         backgroundColor: "#ffa7a7",
         overflow: "hidden",
       }}
-    ><StickyHeader />
+    >
+      <StickyHeader />
       <Grid
         justifyContent="center"
         alignItems="center"
@@ -76,20 +71,25 @@ function ForgetPassword() {
         sx={{ mt: 8 }}
       >
         <Collapse in={open}>
-          {error && <Alert severity="error"
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  setOpen(false);
-                }}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }>
-            {error}</Alert>}
+          {error && (
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              {error}
+            </Alert>
+          )}
         </Collapse>
       </Grid>
       <div style={{ width: "400px", margin: "150px auto" }}>
@@ -104,9 +104,11 @@ function ForgetPassword() {
         >
           <Box
             sx={{
-              width: "28ch", mb: 1, display: "flex",
+              width: "28ch",
+              mb: 1,
+              display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "center",
             }}
             variant="standard"
             component="form"
@@ -127,14 +129,16 @@ function ForgetPassword() {
             <Button
               variant="contained"
               sx={{
-                position: "relative", mb: 2, color:'#ffa7a7',
-                fontWeight: 'bold',
-                fontSize: '1rem',
-                backgroundColor: '#ffffff',
-                borderRadius: '12px',
-                border: 'none',
+                position: "relative",
+                mb: 2,
+                color: "#ffa7a7",
+                fontWeight: "bold",
+                fontSize: "1rem",
+                backgroundColor: "#ffffff",
+                borderRadius: "12px",
+                border: "none",
                 transition: "all 150ms ease",
-                cursor: "pointer" 
+                cursor: "pointer",
               }}
               disable={values.loading}
               type="submit"

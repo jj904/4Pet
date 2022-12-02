@@ -74,6 +74,7 @@ function ProfilePage() {
         // File deleted successfully
       })
       .catch((error) => {
+        setError(error);
         // Uh-oh, an error occurred!
       });
   };
@@ -102,6 +103,7 @@ function ProfilePage() {
             console.log(result);
           })
           .catch((error) => {
+            setError(error);
             console.log(error); //console창에 error가 나옴.
           });
       });

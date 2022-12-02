@@ -6,19 +6,18 @@ import { Link, useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import {registerUser,} from "../../firebase";
-import {useAuth} from '../../contexts/AuthContext'
-import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import Collapse from '@mui/material/Collapse';
-import axios from "axios"
+import { registerUser } from "../../firebase";
+import { useAuth } from "../../contexts/AuthContext";
+import Alert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Collapse from "@mui/material/Collapse";
 import StickyHeader from "../../components/StickyHeader";
 
 function RegisterPage() {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
   const [error, setError] = useState();
   const [open, setOpen] = useState(true);
   const [values, setValues] = useState({
@@ -32,11 +31,11 @@ function RegisterPage() {
   });
 
   useEffect(() => {
-    document.title = "Register";  
-    if (loading){
-      return ;
-    } 
-  }, [user, loading,error,open, navigate]);
+    document.title = "Register";
+    if (loading) {
+      return;
+    }
+  }, [user, loading, error, open, navigate]);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -44,25 +43,29 @@ function RegisterPage() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (!values.email || !values.password || !values.confirmPassword){
-        setOpen(true)
-        return setError('Please Fill out all require info')
-    } 
-    if (values.password !== values.confirmPassword){
-      setOpen(true)
-      return setError('Passwords do not match')
-    } 
+    if (!values.email || !values.password || !values.confirmPassword) {
+      setOpen(true);
+      return setError("Please Fill out all require info");
+    }
+    if (values.password !== values.confirmPassword) {
+      setOpen(true);
+      return setError("Passwords do not match");
+    }
     try {
-        setError('')
-        setOpen(false)
-        setLoading (true)
-        await registerUser( values.username,values.email, values.password, values.zipcode);
-        navigate('/login')
-      }
-     catch {
-      setError('Fail to creat account')
-      setOpen(true)
-      setLoading (false)
+      setError("");
+      setOpen(false);
+      setLoading(true);
+      await registerUser(
+        values.username,
+        values.email,
+        values.password,
+        values.zipcode
+      );
+      navigate("/login");
+    } catch {
+      setError("Fail to creat account");
+      setOpen(true);
+      setLoading(false);
     }
   }
 
@@ -76,31 +79,36 @@ function RegisterPage() {
         overflow: "hidden",
       }}
     >
-    <StickyHeader/>
-    <Grid
-    justifyContent="center"
-    alignItems="center"
-    display="flex"
-    direction="column"
-    sx={{ mt: 8 }}
-  >
-    <Collapse in={open}>
-      {error && <Alert severity="error"
-       action={
-        <IconButton
-          aria-label="close"
-          color="inherit"
-          size="small"
-          onClick={() => {
-            setOpen(false);
-          }}
-        >
-          <CloseIcon fontSize="inherit" />
-        </IconButton>
-      }>
-        {error}</Alert>}
+      <StickyHeader />
+      <Grid
+        justifyContent="center"
+        alignItems="center"
+        display="flex"
+        direction="column"
+        sx={{ mt: 8 }}
+      >
+        <Collapse in={open}>
+          {error && (
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              {error}
+            </Alert>
+          )}
         </Collapse>
-        </Grid>
+      </Grid>
       <div style={{ width: "400px", margin: "100px auto" }}>
         <Typography variant="h3" align="center" sx={{ mb: 1 }}>
           Register
@@ -145,13 +153,13 @@ function RegisterPage() {
               value={values.email}
               onChange={handleChange("email")}
             />
-              <TextField
+            <TextField
               sx={{ mb: 1 }}
               id="zipcode"
               name="zipcode"
               type="zipcode"
               label="ZipCode"
-              inputProps={{ maxLength: 5 ,  minLength: 5 }}
+              inputProps={{ maxLength: 5, minLength: 5 }}
               required
               value={values.zipcode}
               onChange={handleChange("zipcode")}
@@ -180,16 +188,18 @@ function RegisterPage() {
 
             <Button
               variant="contained"
-
-              sx={{ position: "relative", mb: 2,
-              color:'#ffa7a7',
-              fontWeight: 'bold',
-              fontSize: '1rem',
-              backgroundColor: '#ffffff',
-              borderRadius: '12px',
-              border: 'none',
-              transition: "all 150ms ease",
-              cursor: "pointer" }}
+              sx={{
+                position: "relative",
+                mb: 2,
+                color: "#ffa7a7",
+                fontWeight: "bold",
+                fontSize: "1rem",
+                backgroundColor: "#ffffff",
+                borderRadius: "12px",
+                border: "none",
+                transition: "all 150ms ease",
+                cursor: "pointer",
+              }}
               disable={loading}
               type="submit"
             >
