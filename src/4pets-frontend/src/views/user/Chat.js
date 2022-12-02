@@ -21,7 +21,7 @@ function Chat() {
   }, [user, loading, navigate]);
 
   return (
-    <div>
+    <div className="chat_page">
       <Grid
         container
         direction="row"
