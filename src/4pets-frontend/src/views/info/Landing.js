@@ -1,6 +1,6 @@
 import { autocompleteClasses, CssBaseline } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React from "react";
+import React, { useEffect } from "react";
 import AppDescription from "../../components/AppDescription";
 import Header from "../../components/Header";
 import StickyHeader from "../../components/StickyHeader";
@@ -11,28 +11,30 @@ const useStyles = makeStyles((theme) => ({
         height: "auto",
         minHeight: "100vh",
         backgroundImage: `url("https://wallpaperaccess.com/full/390954.jpg")`,
-        backgroundRepeat:'no-repeat',
+        backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
     body: {
         backgroundColor: 'white',
     }
-    
+
 }));
 
-function Landing(){
+function Landing() {
     const classes = useStyles();
-
+    useEffect(() => {
+        document.title = "4Pets";
+    })
     return (
         <div>
             <div className={classes.root}>
-                <CssBaseline/>
-                <StickyHeader/>
-                <Header/>
+                <CssBaseline />
+                <StickyHeader />
+                <Header />
             </div>
-               
+
             <div className={classes.body}>
-                <AppDescription/>
+                <AppDescription />
             </div>
         </div>
     );

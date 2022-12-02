@@ -20,13 +20,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { pink } from "@mui/material/colors";
 import backGraoundImage from "../../assets/19085844_v1008-25-b.jpg";
-import Divider from '@mui/material/Divider';
+import Divider from "@mui/material/Divider";
 
 function HomePage() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
   const [petInMyArea, setPetInMyArea] = useState(false);
   const [userInfo, setUserInfo] = useState(false);
   const [petInfo, setPetInfo] = useState([]);
@@ -47,7 +46,7 @@ function HomePage() {
       return;
     }
     if (!user) {
-      navigate("/login");
+      navigate("/");
       return;
     } else {
       const fetchData = async () => {
@@ -74,11 +73,16 @@ function HomePage() {
       };
       fetchData();
     }
-  }, [user, loading, navigate, error, petInMyArea, petType]);
+  }, [user, loading, navigate, petInMyArea, petType]);
 
   return (
     <div
-      style={{ backgroundImage: `url(${backGraoundImage})`, height: "100vh",}}
+      className="home_page"
+      style={{
+        backgroundImage: `url(${backGraoundImage})`,
+        height: "100vh",
+        backgroundSize: "cover",
+      }}
     >
       <NavBar></NavBar>
       <Grid
@@ -88,18 +92,28 @@ function HomePage() {
         direction="column"
         sx={{ mb: 1, mt: 3 }}
       >
-        <Typography  gutterBottom variant="h4" component="div"  sx={{ fontWeight: 'bold'}}>
+        <Typography
+          gutterBottom
+          variant="h4"
+          component="div"
+          sx={{ fontWeight: "bold" }}
+        >
           Welcome!
         </Typography>
-        <Typography gutterBottom variant="h4" component="div" sx={{ fontWeight: 'bold'}}>
+        <Typography
+          gutterBottom
+          variant="h4"
+          component="div"
+          sx={{ fontWeight: "bold" }}
+        >
           {userInfo.username}
         </Typography>
       </Grid>
-      <Divider  sx={{ mb: 1 }}/>
+      <Divider sx={{ mb: 1 }} />
       <div style={{ border: "100px solid hidden" }}>
         <Box justifyContent="flex-end">
           <Grid container justifyContent="flex-end" display="flex">
-            <FormControl  variant="filled" sx={{m:1, minWidth: 120 }}>
+            <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="demo-simple-select-standard-label">
                 Pet Types
               </InputLabel>
@@ -109,23 +123,42 @@ function HomePage() {
                 value={petType}
                 onChange={handleChange}
                 label="petTypes"
+                sx={{ fontWeight: "bold", fontSize: "1rem" }}
               >
-                <MenuItem value="All">All</MenuItem>
-                <MenuItem value="Dog">Dog</MenuItem>
-                <MenuItem value="Cat">Cat</MenuItem>
+                <MenuItem
+                  sx={{ fontWeight: "bold", fontSize: "1rem" }}
+                  value="All"
+                >
+                  All
+                </MenuItem>
+                <MenuItem
+                  sx={{ fontWeight: "bold", fontSize: "1rem" }}
+                  value="Dog"
+                >
+                  Dog
+                </MenuItem>
+                <MenuItem
+                  sx={{ fontWeight: "bold", fontSize: "1rem" }}
+                  value="Cat"
+                >
+                  Cat
+                </MenuItem>
               </Select>
             </FormControl>
             <FormControlLabel
               control={
-                <Checkbox checked={petInMyArea} onChange={handlePetInArea}  sx={{
-                  color: pink[800],
-                  '&.Mui-checked': {
-                    color: pink[600],
-                  },
-                }}/>
+                <Checkbox
+                  checked={petInMyArea}
+                  onChange={handlePetInArea}
+                  sx={{
+                    color: pink[800],
+                    "&.Mui-checked": {
+                      color: pink[600],
+                    },
+                  }}
+                />
               }
               label="Show Pet In My Area"
-             
             />
           </Grid>
         </Box>
@@ -199,11 +232,19 @@ function HomePage() {
           </Grid>
         </Box>
       </div>
-      <Typography
-                sx={{ mt:(25% + 60),ml:(100),bottom:0 }}
-              >
-     <a href="https://www.freepik.com/free-vector/seamless-animal-pattern-background-cute-paw-print-vector-illustration_20266394.htm#query=pet%20pattern&position=13&from_view=search&track=sph">Background Image by rawpixel.com</a> on Freepik
-  </Typography> 
+      <footer
+        style={{
+          position: "absolute",
+          bottom: "0",
+          width: "100%",
+          height: "2.5rem",
+        }}
+      >
+        <a href="https://www.freepik.com/free-vector/seamless-animal-pattern-background-cute-paw-print-vector-illustration_20266394.htm#query=pet%20pattern&position=13&from_view=search&track=sph">
+          Background Image by rawpixel.com
+        </a>{" "}
+        on Freepik
+      </footer>
     </div>
   );
 }

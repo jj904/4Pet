@@ -3,6 +3,9 @@ import { makeStyles } from "@mui/styles";
 import { Link } from 'react-router-dom';
 import StickyHeader from "../../components/StickyHeader";
 import ContactCover from "../../components/ContactCover";
+import AppDescription from "../../components/AppDescription";
+import Header from "../../components/Header";
+
 import React, { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 function Contact(){
     const classes = useStyles();
     useEffect(() => {
-        document.title = "About";
+        document.title = "Contact";
     })
     return (
         <div>
