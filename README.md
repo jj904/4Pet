@@ -42,7 +42,7 @@ https://www.youtube.com/watch?v=JecOMuejoF8
 
 # Instructions to run the project locally.
 -   Download this project and unzip it in a folder
--   Download and Install Node.js
+-   Download and Install latest version Node.js
 -   Run follow command using command prompt or terminal 
 
 Initiate and run Backend
