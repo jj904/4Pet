@@ -38,7 +38,7 @@ The main goal of the project was to create a web application that allowed users 
 - Readme
 
 # Live Demo
-https://www.youtube.com/watch?v=xBTEQBTefMM
+https://www.youtube.com/watch?v=JecOMuejoF8
 
 # Instructions to run the project locally.
 -   Download this project and unzip it in a folder
