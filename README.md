@@ -37,7 +37,7 @@ The main goal of the project was to create a web application that allowed users 
 - • 4pets-backend 
 - Readme
 
-# Live Demo
+# Project Demo
 https://www.youtube.com/watch?v=JecOMuejoF8
 
 # Instructions to run the project locally.
