@@ -44,6 +44,7 @@ https://www.youtube.com/watch?v=JecOMuejoF8
 -   Download this project and unzip it in a folder
 -   Download and Install latest version Node.js
 -   Run follow command using command prompt or terminal 
+-   cd to project folder
 
 Initiate and run Backend
 -   `cd .\src\4pets-backend\`
